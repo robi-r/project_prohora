@@ -1,0 +1,7 @@
+.homeBody{
+    padding: 0%;
+    height: 1250px;
+    background-image: url("./homeBG.png");
+     background-repeat: no-repeat;
+    background-size: cover;
+}

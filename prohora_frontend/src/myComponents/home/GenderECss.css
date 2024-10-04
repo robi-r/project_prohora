@@ -1,0 +1,69 @@
+.genderEBody{
+    background-color: #FEEDD9;
+    padding: 0%;
+    margin: 0% ;
+    border: 0%;
+    height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+.gET{
+    padding: 0%;
+    margin: 0% 0%;
+    border: 0%;
+    height:max-content;
+    width:100%;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+.gEp1{
+    width:100%;
+    height:max-content;
+    font-size: 25px;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+.gEp2{
+    width:40%;
+    height:max-content;
+    font-size: 25px;
+}
+.gENav{
+     height: 8vmin; 
+     width: 100%;
+     background-color:transparent; 
+     padding: 0%;
+     margin: 0px 0px; 
+     border: 0%; 
+     display: flex; flex-wrap:wrap; 
+     gap: 2px; 
+     align-items: center; 
+     justify-content: space-evenly;
+}
+.gENItems{
+    transition: transform 0.3s ease;
+  }
+  
+  .gENItems:hover {
+    transform: translateY(-10px);
+  }
+.gEImage1{
+    height:350px;
+    width:100%;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}

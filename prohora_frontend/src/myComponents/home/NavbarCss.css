@@ -1,0 +1,8 @@
+.navNodes {
+    transition: transform 0.3s ease;
+  }
+  
+  .navNodes:hover {
+    transform: translateY(-10px);
+  }
+  

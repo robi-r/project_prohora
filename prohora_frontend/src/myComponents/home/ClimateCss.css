@@ -1,0 +1,23 @@
+.climateBody{
+    background-color: #FEEDD9;
+    padding: 0%;
+    height: 1250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+}
+.thenews{
+    height: 99%;
+    width:85%;
+    display:flex;flex-wrap: wrap;
+    justify-content: center;
+    justify-items: center;
+    align-items: center;
+    align-content: center;
+    background-color: aliceblue;
+}
+

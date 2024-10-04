@@ -1,0 +1,13 @@
+.fullFooter{
+    background-color: #3C3D37  ;
+    height:15vmin;
+    width:auto;
+}
+.Team-logo {
+    height: 15vmin;
+    pointer-events: none;
+    display: flex;
+    align-content: center;
+    padding: 0px 0px;
+    margin: 0%;
+  }
