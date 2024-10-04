@@ -1,0 +1,127 @@
+#include <SoftwareSerial.h>
+
+const int wSenor = A1; //Water Sensor pinout
+int sensorValue = 0;	//initial SensorValue for comparision later on
+const int rled = 7;	//Red Led
+const int orled = 8;	//Orange Led
+const int pBuzzer_1=5;	//Buzzer-1
+const int pBuzzer_2=6;	//buzzer-2
+static unsigned long timer = 0; //for better comparison and to send messages after a particular time
+static bool trigger = true;	//for comparitor
+SoftwareSerial mySerial(3, 2);	//build in method of SoftwareSerial.h header library to initialize txd and rxd pinouts
+
+
+
+void prohoraAlarmSystem(){
+
+// This userDefined function will send sms via GSM module to the local fire fighter and Turn the Alarm system on with led indicators.
+
+
+sensorValue = analogRead(wSenor); //reading water sensor value
+Serial.println(sensorValue); // this is for trableshooting
+
+  if((sensorValue>=400)&&((trigger==true)|| (timer==delayMinutes(60)))){  //if the waterlevel stay same for 60 minutes it 									  					//will send another message to the fire fighter department
+    sendingEmergencyMessage();
+    trigger=false;
+    timer=0;
+  }
+
+  if(sensorValue>=400){
+
+   for (int i = 1000; i <= 1500; i += 10) {
+    tone(pBuzzer_1, i);
+    tone(pBuzzer_2, i+100);
+
+    
+    digitalWrite(rled, HIGH);
+    digitalWrite(orled, LOW);
+    delay(20);
+    
+  }
+  for (int i = 1500; i >= 1000; i -= 10) {
+    tone(pBuzzer_1, i);
+    tone(pBuzzer_2, i+100);
+    digitalWrite(rled, LOW);
+    digitalWrite(orled, HIGH);
+    delay(20);
+  }
+
+  timer = 100*20;
+  sensorValue = 0;
+  }else{
+    noTone(pBuzzer_1);
+    digitalWrite(rled, LOW);
+    digitalWrite(orled, LOW);
+    timer=0;
+    trigger=true;
+ 
+  }
+  
+}
+
+void sendingEmergencyMessage(){
+
+//This userDefined function is the main function to send SMS by using GSM module
+
+  Serial.println("Message Initializing..."); //this is for debugging
+  delay(1000);
+
+  mySerial.println("AT");
+  updateSerial();
+
+  mySerial.println("AT+CMGF=1"); 
+  updateSerial();
+  mySerial.println("AT+CMGS=\"+8801981231963\""); // at this AT command I used my own personal phone number for testing
+  updateSerial();
+  mySerial.print("Flood Alert: Severe flooding detected. Evacuate to higher ground immediately.\nFire Service: Assistance needed urgently! Sent by Prohora Alarming System."); // this is the message, which will be sent
+  updateSerial();
+  mySerial.write(26);
+
+}
+
+
+void updateSerial(){
+
+//this function will help to maintain a debuging and delaying to executes All AT commands with particular delay.
+
+
+  delay(500);
+  while (Serial.available()) 
+  {
+    mySerial.write(Serial.read());
+  }
+  while(mySerial.available()) 
+  {
+    Serial.write(mySerial.read());
+  }
+}
+
+unsigned long delayMinutes(unsigned int minute){
+
+//for a custom delay, I made this function
+
+  unsigned long miliSeconds = minute*60UL*1000UL;
+  return miliSeconds;
+
+}
+
+void setup() {
+
+//Setting up all the pinouts
+
+  pinMode(rled,OUTPUT);
+  pinMode(orled,OUTPUT);
+  pinMode(pBuzzer_1,OUTPUT);
+  Serial.begin(9600);
+  mySerial.begin(9600);
+  delay(1000);
+
+}
+
+void loop() {
+  // This is the main loop, which will be repeated all time.
+
+prohoraAlarmSystem();
+
+delay(1000);
+}
